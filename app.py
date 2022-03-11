@@ -41,7 +41,6 @@ def hello_world():
     return 'Hello World!'
 
 
-# done
 @app.route('/promo', methods=['POST'])
 def post_promo():
     if not request.json or not "name" in request.json:
@@ -57,7 +56,6 @@ def post_promo():
     return jsonify(promos[-1]["id"]), 201
 
 
-# done
 @app.route('/promo', methods=['GET'])
 def get_promo():
     clean_promo = []
@@ -71,7 +69,6 @@ def get_promo():
     return jsonify(clean_promo)
 
 
-# done
 @app.route('/promo/<int:promo_id>', methods=['GET'])
 def get_promo_by_id(promo_id):
     promo = list(filter(lambda tmp: tmp['id'] == promo_id, promos))
@@ -80,7 +77,6 @@ def get_promo_by_id(promo_id):
     return jsonify(promo)
 
 
-# done
 @app.route('/promo/<int:promo_id>', methods=['PUT'])
 def put_promo_by_id(promo_id):
     if not request.json:
@@ -94,7 +90,6 @@ def put_promo_by_id(promo_id):
     return jsonify(promo), 202
 
 
-# done
 @app.route('/promo/<int:promo_id>', methods=['DELETE'])
 def delete_product_by_id(promo_id):
     promo = list(filter(lambda tmp: tmp['id'] == promo_id, promos))
@@ -103,7 +98,7 @@ def delete_product_by_id(promo_id):
     promos.remove(promo[0])
     return jsonify({"result": True})
 
-# done
+
 @app.route('/promo/<int:promo_id>/participant', methods=['POST'])
 def post_participant_by_promo(promo_id):
     if not request.json or not "name" in request.json:
@@ -116,7 +111,7 @@ def post_participant_by_promo(promo_id):
     promo[0]["participants"].append(participant)
     return jsonify(promo[0]["participants"][-1]["id"]), 201
 
-#done
+
 @app.route('/promo/<int:promo_id>/participant/<int:participant_id>', methods=['DELETE'])
 def delete_participant_by_id(promo_id, participant_id):
     promo = list(filter(lambda tmp: tmp['id'] == promo_id, promos))
@@ -129,7 +124,7 @@ def delete_participant_by_id(promo_id, participant_id):
     promo[0]["participants"].remove(participant[0])
     return jsonify({"result": True})
 
-# done
+
 @app.route('/promo/<int:promo_id>/prize', methods=['POST'])
 def post_prize_by_promo(promo_id):
     if not request.json or not "description" in request.json:
@@ -142,7 +137,7 @@ def post_prize_by_promo(promo_id):
     promo[0]["prizes"].append(prize)
     return jsonify(promo[0]["prizes"][-1]["id"]), 201
 
-# done
+
 @app.route('/promo/<int:promo_id>/prize/<int:prize_id>', methods=['DELETE'])
 def delete_prize_by_id(promo_id, prize_id):
     promo = list(filter(lambda tmp: tmp['id'] == promo_id, promos))
@@ -163,6 +158,7 @@ def raffle(promo_id):
         error(409)
     else:
         winner_list = []
+        # no random
         for i in range(len(promo[0]["participants"])):
             winner_list.append({
             "winner": {
@@ -176,7 +172,6 @@ def raffle(promo_id):
             }
             )
         return jsonify(winner_list)
-
 
 
 if __name__ == '__main__':
