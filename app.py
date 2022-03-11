@@ -142,7 +142,7 @@ def post_prize_by_promo(promo_id):
     promo[0]["prizes"].append(prize)
     return jsonify(promo[0]["prizes"][-1]["id"]), 201
 
-
+# done
 @app.route('/promo/<int:promo_id>/prize/<int:prize_id>', methods=['DELETE'])
 def delete_prize_by_id(promo_id, prize_id):
     promo = list(filter(lambda tmp: tmp['id'] == promo_id, promos))
@@ -163,7 +163,19 @@ def raffle(promo_id):
         error(409)
     else:
         winner_list = []
-
+        for i in range(len(promo[0]["participants"])):
+            winner_list.append({
+            "winner": {
+                "id": promo[0]["participants"][i]["id"],
+            "name":  promo[0]["participants"][i]["name"]
+            },
+            "prize": {
+                "id": promo[0]["prizes"][i]["id"],
+                "description": promo[0]["prizes"][i]["description"]
+                }
+            }
+            )
+        return jsonify(winner_list)
 
 
 
