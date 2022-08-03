@@ -1,12 +1,12 @@
-# yaprofi_pi_task2
+# yaprofi_pi_task3
 Yaprofi Programm engeneering
 
 Installation
 
 ``` 
-git clone https://github.com/boysmail/yaprofi_pi_task2.git
+git clone https://github.com/boysmail/yaprofi_pi_task3.git
 
-cd yaprofi_pi_task2
+cd yaprofi_pi_task3
 
 pip install -r requirements.txt
 ```
